@@ -1,0 +1,136 @@
+---
+title: "huang-r-hwk1-2"
+author: Ron Huang
+data: \today{}
+
+format: 
+  pdf: 
+    toc: true
+    number-sections: true
+    colorlinks: true
+    highlight-style: atom-one-dark
+    code-hide: true
+
+echo: false
+warning: false
+
+jupyter: python3
+---
+
+## Github: https://github.com/Rorn001/Econ470.git {.unnumbered}
+
+## Enrollment Data
+
+
+```{python}
+import pickle
+
+with open('objects.pkl', 'rb') as f:
+    loaded_q1, loaded_q2, loaded_q21, loaded_q3, loaded_q4, loaded_q5_fig, loaded_q6_fig, loaded_q7_fig, loaded_sum_1 = pickle.load(f)
+
+```
+
+### How many observations exist in your current dataset?
+
+```{python}
+
+loaded_q1
+
+```
+
+\newpage
+## How many different plan_types exist in the data?
+
+```{python}
+
+loaded_q2
+
+```
+
+```{python}
+
+loaded_q21
+
+```
+
+\newpage
+### Provide a table of the count of plans under each plan type in each year. 
+
+```{python}
+
+loaded_q3
+
+```
+
+\newpage
+### Remove all special needs plans (SNP), employer group plans (eghp), and all “800-series” plans. 
+
+```{python}
+
+loaded_q4
+
+```
+
+\newpage
+### Merge the contract service area data to the enrollment data, and restrict the data only to contracts that are approved in their respective counties. Limiting your dataset only to plans with non-missing enrollment data, provide a graph showing the average number of Medicare Advantage enrollees per county from 2010 to 2015.
+
+
+```{python}
+#| label: fig-avgenroll
+#| fig-cap: "Average Enrollment by Year"
+
+import matplotlib.pyplot as plt
+
+plt.show()
+
+loaded_q5_fig
+
+
+```
+
+
+\newpage
+## Premium Data
+
+### Merge the plan characteristics data to the dataset you created in Step 5 above. Note that you’ll need to join the Market Penetration Data in order to get the information you need to merge the plan characteristics. Provide a graph showing the average premium over time.
+
+```{python}
+#| label: fig-avgprem
+#| fig-cap: "Average premium by Year"
+
+loaded_q6_fig
+
+```
+
+\newpage
+### Provide a graph showing the percentage of $0 premium plans over time.
+
+```{python}
+#| label: fig-zero
+#| fig-cap: "percentage of 0 premium plans by Year"
+
+loaded_q7_fig
+
+```
+
+\newpage
+## Summary Questions
+
+### Why did we drop the “800-series” plans?
+
+
+```{python}
+loaded_sum_1
+```
+
+800-series plans are coded as the employer group waiver plans and they are not avaiable to all people therefore cannot represent the general population, but some of them are not coded as true in the egwp column. As shown in the above tabel, there are 1774 plans that are 800-series plans but not egwp. Therefore, we drop the 800-series plans to exclude all egwp plans. 
+
+\newpage
+### Why do so many plans charge a $0 premium? What does that really mean to a beneficiary?
+
+0 premium plans mean 0 in addition to Medicare Part B, which means that enrollees still have to pay for Part B premium. 0 premium plans may be designed to provide health insurance to those who cannot afford other expensive plans or to those who think they are healthy and do not need to pay for higher premium. It seems it is a good way to contain cost for the enrolles, but 0 premium plans may still result in high out-of-pocket cost due to high deductible, copayment, or coinsurance rate. Also those plans may have limited coverage and network, so out-of-network payment and surprsing bills could also occur.
+
+\newpage
+### Briefly describe your experience working with these data (just a few sentences). Tell me one thing you learned and one thing that really aggravated you.
+
+The most troublesome issue when dealing with these data is the size the data. It takes very long to load data, and there are raw data such that we have to spend quite a lot of time to clean it before any analysis. Sometimes my computer may run out of memory and I have to restart it.
